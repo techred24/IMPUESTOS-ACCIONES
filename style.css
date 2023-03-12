@@ -6,6 +6,33 @@
 body {
     font-family: sans-serif;
 }
+[class$='container'] {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.buttons__container {
+    padding: 2rem 0;
+}
+.container__messages {
+    padding: 1rem 0;
+}
+.sell-purchase__container {
+    display: flex;
+    gap: 1rem;
+    padding: 0rem 0;
+}
+[class*='message__'] {
+    margin: .5rem 0;
+}
+.input__data {
+    display: flex;
+    flex-direction: column;
+}
+.data__sell, .data__purchase {
+    display: grid;
+    gap: 2rem;
+}
 .selectIndex {
     all: unset;
     display: inline-block;
@@ -42,7 +69,7 @@ body {
 }
 .modal__container {
     position: relative;
-    background: rgb(214, 214, 36);
+    background: rgb(164, 164, 33);
     width: 90%;
     max-width: 900px;
     margin: auto;
@@ -151,6 +178,6 @@ body {
 .inpc__fecha {
     font-weight: bold;
 }
-.inpc__dato {
+/* .inpc__dato {
     
-}
+} */

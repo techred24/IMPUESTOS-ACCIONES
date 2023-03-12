@@ -1,5 +1,6 @@
 const fechas = [];
 const dateData = [];
+let kindOfIndexToAdd = '';
 async function request() {
     const resp = await fetch('https://www.banxico.org.mx/SieAPIRest/service/v1/series/SP1/datos?' + new URLSearchParams({
         'token': 'ea526ff2d8d0cce16cd66f8aa4fb078b66d1e6ce0b3b6b8c9c8dcbb25e65533e',
@@ -27,12 +28,13 @@ async function request() {
                 if (fechas.includes(dia.fecha.slice(6))) continue
                 fechas.push(dia.fecha.slice(6));
             }
-            assignFirtYear();
+            // assignFirtYear();
     }
 request();
 
 let $currentSelectedYear = document.getElementById('currentSelectedYear');
-const $openModalButton = document.getElementById('selectIndex');
+const $openModalButtonPurchase = document.getElementById('selectIndexPurchase');
+const $openModalButtonSell = document.getElementById('selectIndexSell');
 const $closeModalButton = document.getElementById('modal__button-close');
 const $modal = document.getElementById('modal');
 
@@ -42,8 +44,15 @@ const assignFirtYear = () => {
     $currentSelectedYear.innerText = firstYear;
     changeDates(Number(firstYear));
 }
-$openModalButton.addEventListener('click', () => {
+$openModalButtonPurchase.addEventListener('click', () => {
     $modal.classList.add('target');
+    assignFirtYear();
+    kindOfIndexToAdd = 'purchase';
+});
+$openModalButtonSell.addEventListener('click', () => {
+    $modal.classList.add('target');
+    assignFirtYear();
+    kindOfIndexToAdd = 'sell';
 });
 $closeModalButton.addEventListener('click', () => {
     $modal.classList.remove('target');
