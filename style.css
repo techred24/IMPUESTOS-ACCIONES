@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: sans-serif;
+}
+.selectIndex {
+    all: unset;
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    background-color: #007ACC;
+    color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    transition: background-color .3s ease;
+}
+.selectIndex:hover {
+    background-color: #3a94cf;
+}
+.modal {
+    position: fixed;
+    background-color: #333333;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+
+    --opacity: 0;
+    --pointer: none;
+    opacity: var(--opacity);
+    pointer-events: var(--pointer);
+    transition: opacity .5s ease-in;
+}
+.modal.target {
+    --opacity: 1;
+    --pointer: unset;
+}
+.modal__container {
+    position: relative;
+    background: rgb(214, 214, 36);
+    width: 90%;
+    max-width: 900px;
+    margin: auto;
+    overflow: hidden;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    border-radius: 1rem;
+}
+.modal.target .modal__container {
+    /* Wait 5 seconds because modal transition is set to 5 seconds */
+    /* backwards is set to prevent the element from being position as if it doesnt have the styles in the animation. 
+    backwards makes the element to take the style at 0% in the animation while waiting to start the animation. The animations starts in .5s*/
+    animation: show 1s .5s backwards;
+}
+@keyframes show {
+    0% {
+        transform: translateY(-150vh);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+.modal__button-close {
+    position: absolute;
+    right: 6px;
+    top: 5px;
+    text-decoration: none;
+    background-color: #3a94cf;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 2px solid #183f59;
+    color: #183f59;
+    cursor: pointer;
+}
+.modal__button-close:hover {
+    border-color: rgb(152, 24, 24);
+    color: rgb(152, 24, 24);
+}
+
+.inpc__arrows {
+    /* background-color: #183f59; */
+    display: flex;
+    justify-content: space-between;
+}
+.back_arrow, .forward_arrow {
+    all: unset;
+    font-size: 2em;
+    padding: .5rem;
+    font-weight: bold;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: #007ACC;
+    transition: background-color .3s ease;
+    transition: transform .1s ease;
+}
+.back_arrow:hover, .forward_arrow:hover {
+    background-color: #1c9aed;
+    
+}
+.back_arrow:active, .forward_arrow:active {
+    transform: scale(1.2);
+}
+.inpc__indices {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: .2rem;
+    overflow-x: scroll;
+    padding: 1rem 0;
+    /* border: 1px solid saddlebrown; */
+}
+.inpc__indices::-webkit-scrollbar {
+    width: 5px;
+  }
+.inpc__indices::-webkit-scrollbar-track {
+    background: #a85353;
+    border-radius: 5px;
+  }
+  .inpc__indices::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+    width: 2px;
+  }
+  .inpc__indices::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+.inpc__indice {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color .2s ease-in-out;
+    padding: .5rem;
+}
+.inpc__indice:hover {
+    background-color: #1699f0;
+}
+.inpc__indice:active {
+    background-color: #2a6e9b;
+}
+.inpc__fecha {
+    font-weight: bold;
+}
+.inpc__dato {
+    
+}
