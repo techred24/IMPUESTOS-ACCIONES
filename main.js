@@ -60,3 +60,29 @@ document.getElementById('inpc__indices').addEventListener('click', (event) => {
         closeModalButton.click();
     }
 });
+
+// purchasePrice purchaseCommission sellPrice sellCommission
+document.getElementById('purchasePrice').addEventListener('keypress', (event) => {
+    event.preventDefault()
+      if (event.target.value.split('').some((char) => char === '.') && event.key === '.') return
+      let key = window.event ? event.which : event.keyCode
+      if ((key >= 48 && key <= 57) || key === 46) event.target.value += event.key
+});
+document.getElementById('purchaseCommission').addEventListener('keypress', (event) => {
+    event.preventDefault()
+      if (event.target.value.split('').some((char) => char === '.') && event.key === '.') return
+      let key = window.event ? event.which : event.keyCode
+      if ((key >= 48 && key <= 57) || key === 46) event.target.value += event.key
+});
+document.getElementById('sellPrice').addEventListener('keypress', (event) => {
+    event.preventDefault()
+      if (event.target.value.split('').some((char) => char === '.') && event.key === '.') return
+      let key = window.event ? event.which : event.keyCode
+      if ((key >= 48 && key <= 57) || key === 46) event.target.value += event.key
+});
+document.getElementById('sellCommission').addEventListener('keypress', (event) => {
+    event.preventDefault()
+      if (event.target.value.split('').some((char) => char === '.') && event.key === '.') return
+      let key = window.event ? event.which : event.keyCode
+      if ((key >= 48 && key <= 57) || key === 46) event.target.value += event.key
+});
