@@ -69,7 +69,24 @@ export const createElementsForMonthData = (newDates) => {
 
 export const setIndicesForUser = (id, { fecha, dato }) => {
     const indexToShow = document.getElementById(id);
-    console.log(indexToShow, 'TAG SELECTED')
     indexToShow.innerText = '';
     indexToShow.innerText = `${dato} (${fecha})`;
+    verifyIfSetBothIndexed()
+}
+const verifyIfSetBothIndexed = () => {
+    const purchaseIndexContent = document.getElementById('purchase-figure').innerHTML;
+    const sellIndexContent = document.getElementById('sell-figure').innerHTML;
+    if (purchaseIndexContent.length === 0 || sellIndexContent.length === 0) return;
+    console.log('llegando aqui')
+    setUpdateFactor();
+}
+const setUpdateFactor = () => {
+    const purchaseIndex = document.getElementById('purchase-figure').innerText.split(' ')[0];
+    const sellIndex = document.getElementById('sell-figure').innerText.split(' ')[0];
+    console.log(Number(purchaseIndex))
+    console.log(Number(sellIndex))
+    console.log(Number(sellIndex) / Number(purchaseIndex))
+    const updateFigure = document.getElementById('update-figure');
+    let updateIndex = Number(sellIndex) / Number(purchaseIndex);
+    updateFigure.innerText = updateIndex;
 }
