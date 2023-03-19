@@ -6,15 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INPC</title>
     <link rel="stylesheet" href="style.css">
+    <script defer src="main.js" type="module"></script>
 </head>
 <body>
-    <div class="buttons__container">
+    <div class="buttons__container" id="buttons__container">
         <button id="selectIndexPurchase" class="selectIndex">Seleccionar indice de compra</button>
         <button id="selectIndexSell" class="selectIndex">Seleccionar indice de venta</button>
-        <div class="container__messages">
-            <p class="message__purchase-index">Indice de mes anterior a la compra: <span id="purchase-figure"></span></p>
-            <p class="message__sell-index">Indice de mes al vender: <span id="sell-figure"></span></p>
-            <p class="message__update-factor">Factor de actualización: <span id="update-figure"></span></p>
+        <div class="indices-compra-venta__wrapper">
+            <p class="purchase-index">Indice de mes anterior a la compra: <span id="purchase-figure"></span></p>
+            <p class="sell-index">Indice de mes al vender: <span id="sell-figure"></span></p>
+            <p class="update-factor">Factor de actualización: <span id="update-figure"></span></p>
         </div>
     </div>
 
@@ -30,6 +31,7 @@
                 <input type="text" id="purchaseCommission">
             </div>
         </div>
+
         <div class="data__sell">
             <div class="input__data">
                 <label for="sellPrice">Precio de venta:</label>
@@ -44,6 +46,7 @@
 
 
     <section class="modal" id="modal">
+
         <div class="modal__container">
             <button class="modal__button-close" id="modal__button-close">x</button>
             <h3>Indice Nacional de Precios al Consumidor</h3>
@@ -52,60 +55,12 @@
                     <button id="back_arrow" class="back_arrow">←</button>
                     <button id="forward_arrow" class="forward_arrow">→</button>
                 </div>
+
                 <p id="currentSelectedYear"></p>
                 <div id="inpc__indices" class="inpc__indices">
-                    <div class="inpc__indice">
-                        <p class="inpc__fecha"></p>
-                        <p class="inpc__dato"></p>
-                    </div>
-                    <div class="inpc__indice">
-                        <p class="inpc__fecha"></p>
-                        <p class="inpc__dato"></p>
-                    </div>
-                    <div class="inpc__indice">
-                        <p class="inpc__fecha"></p>
-                        <p class="inpc__dato"></p>
-                    </div>
-                    <div class="inpc__indice">
-                        <p class="inpc__fecha"></p>
-                        <p class="inpc__dato"></p>
-                    </div>
-                    <div class="inpc__indice">
-                        <p class="inpc__fecha"></p>
-                        <p class="inpc__dato"></p>
-                    </div>
-                    <div class="inpc__indice">
-                        <p class="inpc__fecha"></p>
-                        <p class="inpc__dato"></p>
-                    </div>
-                    <div class="inpc__indice">
-                        <p class="inpc__fecha"></p>
-                        <p class="inpc__dato"></p>
-                    </div>
-                    <div class="inpc__indice">
-                        <p class="inpc__fecha"></p>
-                        <p class="inpc__dato"></p>
-                    </div>
-                    <div class="inpc__indice">
-                        <p class="inpc__fecha"></p>
-                        <p class="inpc__dato"></p>
-                    </div>
-                    <div class="inpc__indice">
-                        <p class="inpc__fecha"></p>
-                        <p class="inpc__dato"></p>
-                    </div>
-                    <div class="inpc__indice">
-                        <p class="inpc__fecha"></p>
-                        <p class="inpc__dato"></p>
-                    </div>
-                    <div class="inpc__indice">
-                        <p class="inpc__fecha"></p>
-                        <p class="inpc__dato"></p>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
-    <script src="main.js"></script>
 </body>
 </html>
