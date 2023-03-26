@@ -1,7 +1,7 @@
-import { request, createElement, changeDates, setIndicesForUser } from "./helpers.js";
+import { ListView, PurchaseModalAdapter, SellModalAdapter } from "./adapter.js";
+import { request, findMonthsForYear, setIndicesForUser } from "./helpers.js";
 const anios = [];
 const dateData = [];
-let kindOfIndexToAdd = '';
 
 // if (indexedDB) {
 
@@ -13,21 +13,21 @@ const $openModalButtonPurchase = document.getElementById('selectIndexPurchase');
 const $openModalButtonSell = document.getElementById('selectIndexSell');
 const $closeModalButton = document.getElementById('modal__button-close');
 const $modal = document.getElementById('modal');
+const $inpcContainer = document.getElementById('inpc__indices');
 
-const assignFirtYear = () => {
+const getMonthsForCurrentYear = () => {
     let firstYear = anios[0];
     $currentSelectedYear.innerText = firstYear;
-    changeDates(Number(firstYear), dateData);
+    const monthsForYear = findMonthsForYear(Number(firstYear), dateData);
+    return monthsForYear;
 }
 $openModalButtonPurchase.addEventListener('click', () => {
-    $modal.classList.add('target');
-    assignFirtYear();
-    kindOfIndexToAdd = 'purchase';
+    const adapter = new PurchaseModalAdapter(getMonthsForCurrentYear());
+    ListView.showModal(adapter);
 });
 $openModalButtonSell.addEventListener('click', () => {
-    $modal.classList.add('target');
-    assignFirtYear();
-    kindOfIndexToAdd = 'sell';
+    const adapter = new SellModalAdapter(getMonthsForCurrentYear());
+    ListView.showModal(adapter);
 });
 $closeModalButton.addEventListener('click', () => {
     $modal.classList.remove('target');
@@ -40,49 +40,28 @@ document.addEventListener('DOMContentLoaded', () => {
         let previousYear = Number($currentSelectedYear.innerText) - 1;
         if (!anios.includes(previousYear.toString())) return;
             $currentSelectedYear.innerText = previousYear;
-            changeDates(previousYear, dateData);
+            findMonthsForYear(previousYear, dateData);
     });
     $forwardArrow.addEventListener('click', () => {
         let nextYear = Number($currentSelectedYear.innerText) + 1;
         if (!anios.includes(nextYear.toString())) return;
             $currentSelectedYear.innerText = nextYear;
-            changeDates(nextYear, dateData);
+            findMonthsForYear(nextYear, dateData);
     });
 });
 
 document.getElementById('inpc__indices').addEventListener('click', (event) => {
-    const closeModalButton = document.getElementById('modal__button-close');
     if (event.target.className === 'inpc__indice') {
         console.log(event.target.children[0].innerText, event.target.children[1].innerText);
-        const id = kindOfIndexToAdd === 'purchase' ? 'purchase-figure' : 'sell-figure';
-        console.log(id, 'ID');
+        const id = $inpcContainer.dataset.type === 'purchase' ? 'purchase-figure' : 'sell-figure';
         setIndicesForUser(id, { fecha: event.target.children[0].innerText, dato: event.target.children[1].innerText });
-        closeModalButton.click();
+        $closeModalButton.click();
     }
 });
 
-// purchasePrice purchaseCommission sellPrice sellCommission
-document.getElementById('purchasePrice').addEventListener('keypress', (event) => {
-    event.preventDefault()
-      if (event.target.value.split('').some((char) => char === '.') && event.key === '.') return
-      let key = window.event ? event.which : event.keyCode
-      if ((key >= 48 && key <= 57) || key === 46) event.target.value += event.key
-});
-document.getElementById('purchaseCommission').addEventListener('keypress', (event) => {
-    event.preventDefault()
-      if (event.target.value.split('').some((char) => char === '.') && event.key === '.') return
-      let key = window.event ? event.which : event.keyCode
-      if ((key >= 48 && key <= 57) || key === 46) event.target.value += event.key
-});
-document.getElementById('sellPrice').addEventListener('keypress', (event) => {
-    event.preventDefault()
-      if (event.target.value.split('').some((char) => char === '.') && event.key === '.') return
-      let key = window.event ? event.which : event.keyCode
-      if ((key >= 48 && key <= 57) || key === 46) event.target.value += event.key
-});
-document.getElementById('sellCommission').addEventListener('keypress', (event) => {
-    event.preventDefault()
-      if (event.target.value.split('').some((char) => char === '.') && event.key === '.') return
+document.getElementById('sell-purchase__container').addEventListener('keypress', (event) => {
+    event.preventDefault();
+      if (event.target.value.includes('.') && event.key === '.') return
       let key = window.event ? event.which : event.keyCode
       if ((key >= 48 && key <= 57) || key === 46) event.target.value += event.key
 });

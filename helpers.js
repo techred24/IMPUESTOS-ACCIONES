@@ -23,16 +23,15 @@ export const request = async (dateData, anios) => {
                 anios.push(dia.fecha.slice(6));
             }
     }
- export const changeDates = (yearToFind, [...dateData]) => {
+ export const findMonthsForYear = (yearToFind, [...dateData]) => {
+        let newDates = dateData.filter(date => date.fecha.includes(yearToFind));
+        return newDates;
+    }
+ export const deletePreviousElements = () => {
         const $inpcContainer = document.getElementById('inpc__indices');
         const inpcData = $inpcContainer.children;
-        deletePreviousElements(inpcData);
-        let newDates = dateData.filter(date => date.fecha.includes(yearToFind));
-        createElementsForMonthData(newDates);
-    }
-    const deletePreviousElements = (prevElements) => {
-        if (prevElements.length === 0) return
-        [...prevElements].forEach(element => element.remove());
+        if (inpcData.length === 0) return
+        [...inpcData].forEach(element => element.remove());
     }
 export const createElementsForMonthData = (newDates) => {
     const elementDataContainer = {
@@ -69,7 +68,7 @@ export const createElementsForMonthData = (newDates) => {
 
 export const setIndicesForUser = (id, { fecha, dato }) => {
     const indexToShow = document.getElementById(id);
-    indexToShow.innerText = '';
+    // indexToShow.innerText = '';
     indexToShow.innerText = `${dato} (${fecha})`;
     verifyIfSetBothIndexed()
 }
