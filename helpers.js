@@ -89,3 +89,4 @@ const setUpdateFactor = () => {
     let updateIndex = Number(sellIndex) / Number(purchaseIndex);
     updateFigure.innerText = updateIndex;
 }
+// Addin' comment
