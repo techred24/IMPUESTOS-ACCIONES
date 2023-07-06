@@ -5,10 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INPC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <script defer src="main.js" type="module"></script>
 </head>
 <body>
+    <header class="header container">
+        <nav class="nav">
+            <ul class="menu">
+                <li><a href="http://localhost:5501/">Registrar compra de acción</a></li>
+                <li><a href="http://localhost:5501/">Registrar venta de acción</a></li>
+                <li><a href="http://localhost:5501/">Calcular impuesto de enajenación</a></li>
+                <li><a href="http://localhost:5501/">Registrar documento</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="wrapper">
+        <div class="icon"><i id="left" class="fa-solid fa-angle-left"></i></div>
+        <ul class="tabs-box">
+          <!-- <li class="tab active">Registar compra de acción</li> -->
+          <li class="tab">Registar compra de acción</li>
+          <li class="tab">Registrar venta de acción</li>
+          <li class="tab">Calcular impuesto de enajenación de acción</li>
+          <li class="tab">Registrar documentos</li>
+        </ul>
+        <div class="icon"><i id="right" class="fa-solid fa-angle-right"></i></div>
+      </div>
+
+
+
+
+
+
     <div class="buttons__container" id="buttons__container">
         <button id="selectIndexPurchase" class="selectIndex">Seleccionar indice de compra</button>
         <button id="selectIndexSell" class="selectIndex">Seleccionar indice de venta</button>
