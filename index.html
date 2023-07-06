@@ -5,44 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INPC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <script defer src="main.js" type="module"></script>
 </head>
 <body>
-    <div class="buttons__container" id="buttons__container">
-        <button id="selectIndexPurchase" class="selectIndex">Seleccionar indice de compra</button>
-        <button id="selectIndexSell" class="selectIndex">Seleccionar indice de venta</button>
-        <div class="indices-compra-venta__wrapper">
-            <p class="purchase-index">Indice de mes anterior a la compra: <span id="purchase-figure"></span></p>
-            <p class="sell-index">Indice de mes al vender: <span id="sell-figure"></span></p>
-            <p class="update-factor">Factor de actualización: <span id="update-figure"></span></p>
-        </div>
-    </div>
+    <div class="wrapper">
+        <div class="icon"><i id="left" class="fa-solid fa-angle-left"></i></div>
+        <ul class="tabs-box">
+          <!-- <li class="tab active">Registar compra de acción</li> -->
+          <li class="tab">Registar compra de acción</li>
+          <li class="tab">Registrar venta de acción</li>
+          <li class="tab">Calcular impuesto de enajenación de acción</li>
+          <li class="tab">Registrar documentos</li>
+        </ul>
+        <div class="icon"><i id="right" class="fa-solid fa-angle-right"></i></div>
+      </div>
 
-
-    <div class="sell-purchase__container" id="sell-purchase__container">
-        <div class="data__purchase">
-            <div class="input__data">
-                <label for="purchasePrice">Precio de compra:</label>
-                <input type="text" id="purchasePrice">
-            </div>
-            <div class="input__data">
-                <label for="purchaseCommission">Comisión pagada por la compra:</label>
-                <input type="text" id="purchaseCommission">
-            </div>
-        </div>
-
-        <div class="data__sell">
-            <div class="input__data">
-                <label for="sellPrice">Precio de venta:</label>
-                <input type="text" id="sellPrice">
-            </div>
-            <div class="input__data">
-                <label for="sellCommission">Comisión pagada por la venta:</label>
-                <input type="text" id="sellCommission">
-            </div>
-        </div>
-    </div>
 
 
     <section class="modal" id="modal">
