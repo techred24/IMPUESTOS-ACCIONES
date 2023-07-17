@@ -105,8 +105,13 @@ allTabs.forEach(tab => {
 });
 allTabs.forEach(tab => {
     tab.addEventListener('click', ()=> {
+        if (document.getElementById('buttons__container') && document.getElementById('sell-purchase__container')) {
+            document.getElementById('buttons__container').remove()
+            document.getElementById('sell-purchase__container').remove()
+        }
         if (tab.innerText === 'Calcular impuesto de enajenación de acción') {
-            document.body.insertAdjacentHTML('beforeend', `<div class="buttons__container" id="buttons__container">
+            document.body.insertAdjacentHTML('beforeend', `
+            <div class="buttons__container" id="buttons__container">
             <button id="selectIndexPurchase" class="selectIndex">Seleccionar indice de compra</button>
             <button id="selectIndexSell" class="selectIndex">Seleccionar indice de venta</button>
             <div class="indices-compra-venta__wrapper">
