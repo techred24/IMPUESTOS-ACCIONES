@@ -1,3 +1,5 @@
+import { store } from "./store.js";
+
 export const createElement = ({ name, attributes }) => {
     const element = document.createElement(name);
     for (const [attribute, value] of Object.entries(attributes)) {
@@ -65,18 +67,34 @@ export const createElementsForMonthData = (newDates) => {
         document.getElementById('inpc__indices').prepend(elementToAdd);
     }
 }
-
+const comparePurchasePriceNotGreaterThanSellPrice = (id) => {
+    const completeSellDate = localStorage.getItem('sell-figure');
+    const completePurchaseDate = localStorage.getItem('purchase-figure');
+    const sellYear = Number(completeSellDate.split('/')[1]);
+    const sellMonth = Number(completeSellDate.split('/')[0]);
+    const purchaseYear = Number(completePurchaseDate.split('/')[1]);
+    const purchaseMonth = Number(completePurchaseDate.split('/')[0]);
+    const sellDate = new Date(sellYear, sellMonth, 0).getTime();
+    const purchaseDate = new Date(purchaseYear, purchaseMonth, 0).getTime();
+    if (purchaseDate > sellDate) {
+        document.getElementById(id).innerText = ''
+        localStorage.setItem(id, undefined);
+        alert('La fecha de compra no puede ser mayor a la fecha de venta');
+    }
+}
 export const setIndicesForUser = (id, { fecha, dato }) => {
     const indexToShow = document.getElementById(id);
     // indexToShow.innerText = '';
     indexToShow.innerText = `${dato} (${fecha})`;
-    verifyIfSetBothIndexed()
+    setDatesForShareTransaction(id, fecha);
+    verifyIfSetBothIndexed(id)
 }
-const verifyIfSetBothIndexed = () => {
+const verifyIfSetBothIndexed = (id) => {
     const purchaseIndexContent = document.getElementById('purchase-figure').innerHTML;
     const sellIndexContent = document.getElementById('sell-figure').innerHTML;
     if (purchaseIndexContent.length === 0 || sellIndexContent.length === 0) return;
-    console.log('llegando aqui')
+    comparePurchasePriceNotGreaterThanSellPrice(id)
+    console.log('llegando aqui');
     setUpdateFactor();
 }
 const setUpdateFactor = () => {
@@ -89,4 +107,22 @@ const setUpdateFactor = () => {
     let updateIndex = Number(sellIndex) / Number(purchaseIndex);
     updateFigure.innerText = updateIndex;
 }
-// Addin' comment
+const setDatesForShareTransaction = (id, fecha) => {
+    localStorage.setItem(id, fecha);
+}
+// const updatePurchaseDate = () => {
+//     store.dispatch({
+//         type: 'purchase-date',
+//         payload: {
+//             purchaseDate: 'purchase date from helper'
+//         }
+//     });
+// }
+// const updateSellDate = () => {
+//     store.dispatch({
+//         type: 'sell-date',
+//         payload: {
+//             sellDate: 'sell date from helper'
+//         }
+//     })
+// }
