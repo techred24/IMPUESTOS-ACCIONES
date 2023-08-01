@@ -401,7 +401,7 @@ body {
 .toast i:last-child:hover {
   color: var(--dark);
 }
-.buttons .btn {
+/* .buttons .btn {
   border: none;
   outline: none;
   cursor: pointer;
@@ -410,7 +410,7 @@ body {
   font-size: 1.2rem;
   padding: 10px 20px;
   border-radius: 4px;
-}
+} */
 
 @media screen and (max-width: 530px) {
   .notifications {

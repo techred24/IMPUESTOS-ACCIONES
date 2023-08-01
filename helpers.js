@@ -1,3 +1,4 @@
+import { createToast } from "./main.js";
 import { store } from "./store.js";
 
 export const createElement = ({ name, attributes }) => {
@@ -79,7 +80,7 @@ const comparePurchasePriceNotGreaterThanSellPrice = (id) => {
     if (purchaseDate > sellDate) {
         document.getElementById(id).innerText = ''
         localStorage.setItem(id, undefined);
-        alert('La fecha de compra no puede ser mayor a la fecha de venta');
+        createToast('error', 'El mes de compra no debe ser mayor al mes de venta');
     }
 }
 export const setIndicesForUser = (id, { fecha, dato }) => {
