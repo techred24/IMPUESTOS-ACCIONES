@@ -41,6 +41,7 @@ export const createElementsForMonthData = (newDates) => {
         name: 'div',
         attributes: {
             class: 'inpc__indice'
+            //tab__date
         }
     }
     const dateElement = {
