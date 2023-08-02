@@ -65,11 +65,49 @@ const dateData = [];
 //       if ((key >= 48 && key <= 57) || key === 46) event.target.value += event.key
 // });
 
+const datesBox = document.querySelector('#dates-box');
+const dateTabs = document.querySelectorAll('.tab__date');
+const dateArrowIcons = document.querySelectorAll('.icon-date i');
 
+let isDragginDateTabs = false;
+const handleDateIcons = (scrollVal) => {
+    let maxScrollableWidth = datesBox.scrollWidth - datesBox.clientWidth;
+    dateArrowIcons[0].parentElement.style.display = scrollVal <= 0 ? "none" : "flex";
+    dateArrowIcons[1].parentElement.style.display = maxScrollableWidth - scrollVal <= 1 ? "none" : "flex";
+}
 
+dateArrowIcons.forEach(icon => {
+    icon.addEventListener("click", () => {
+        // if clicked icon is left, reduce 350 from tabsBox scrollLeft else add
+        let scrollWidth = datesBox.scrollLeft += icon.id === "date-left" ? -340 : 340;
+        // console.log(scrollWidth, 'scrollWidth');
+        handleDateIcons(scrollWidth);
+    });
+});
 
+dateTabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+        // tabsBox.querySelector(".active").classList.remove("active");
+        dateTabs.forEach(tab => tab.matches('.active') ? tab.classList.remove('active') : null);
+        tab.classList.add("active");
+    });
+});
+const draggingDates = (e) => {
+    if(!isDragginDateTabs) return;
+    datesBox.classList.add("dragging");
+    console.log(e.movementX, 'e.movementX');
+    datesBox.scrollLeft -= e.movementX;
+    handleIcons(datesBox.scrollLeft)
+}
 
+const dateDragStop = () => {
+    isDragginDateTabs = false;
+    datesBox.classList.remove("dragging");
+}
 
+datesBox.addEventListener("mousedown", () => isDragginDateTabs = true);
+datesBox.addEventListener("mousemove", draggingDates);
+document.addEventListener("mouseup", dateDragStop);
 
 
 const tabsBox = document.querySelector(".tabs-box"),
@@ -103,6 +141,7 @@ allTabs.forEach(tab => {
         tab.classList.add("active");
     });
 });
+
 allTabs.forEach(tab => {
     tab.addEventListener('click', ()=> {
         if (document.getElementById('buttons__container') && document.getElementById('sell-purchase__container')) {

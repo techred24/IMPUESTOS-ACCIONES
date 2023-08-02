@@ -38,9 +38,9 @@ export const request = async (dateData, anios) => {
     }
 export const createElementsForMonthData = (newDates) => {
     const elementDataContainer = {
-        name: 'div',
+        name: 'li',
         attributes: {
-            class: 'inpc__indice'
+            class: 'tab__date'
             //tab__date
         }
     }
@@ -66,6 +66,7 @@ export const createElementsForMonthData = (newDates) => {
         fecha.innerText = infoToAdd.fecha;
         elementToAdd.appendChild(fecha);
         elementToAdd.appendChild(dato);
+        console.log(document.getElementById('inpc__indices'))
         document.getElementById('inpc__indices').prepend(elementToAdd);
     }
 }
