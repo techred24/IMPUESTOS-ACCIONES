@@ -77,6 +77,37 @@ const clickListenerOnTab = (event) => {
 document.getElementById('dates-box').addEventListener('click', clickListenerOnTab);
 
 
+let $currentSelectedYear = document.getElementById('currentSelectedYear');
+document.addEventListener('DOMContentLoaded', () => {
+    const $backArrow = document.getElementById('back_arrow');
+    const $forwardArrow = document.getElementById('forward_arrow');
+    $backArrow.addEventListener('click', () => {
+        console.log('Clicking on back arrow')
+        let previousYear = Number($currentSelectedYear.innerText) - 1;
+        if (!anios.includes(previousYear.toString())) return;
+            $currentSelectedYear.innerText = previousYear;
+            findMonthsForYear(previousYear, dateData);
+    });
+    $forwardArrow.addEventListener('click', () => {
+        console.log('Clicking on forward arrow')
+        let nextYear = Number($currentSelectedYear.innerText) + 1;
+        if (!anios.includes(nextYear.toString())) return;
+            $currentSelectedYear.innerText = nextYear;
+            findMonthsForYear(nextYear, dateData);
+    });
+});
+const getMonthsForCurrentYear = () => {
+    let firstYear = anios[0];
+    $currentSelectedYear.innerText = firstYear;
+    const monthsForYear = findMonthsForYear(Number(firstYear), dateData);
+    return monthsForYear;
+}
+
+const $modal = document.getElementById('modal');
+$closeModalButton.addEventListener('click', () => {
+    $modal.classList.remove('target');
+});
+
 const datesBox = document.querySelector('#dates-box');
 const dateTabs = document.querySelectorAll('.tab__date');
 const dateArrowIcons = document.querySelectorAll('.icon-date i');
@@ -196,18 +227,9 @@ allTabs.forEach(tab => {
             </div>
             </div>`)
 
-        let $currentSelectedYear = document.getElementById('currentSelectedYear');
         const $openModalButtonPurchase = document.getElementById('selectIndexPurchase');
         const $openModalButtonSell = document.getElementById('selectIndexSell');
-        const $modal = document.getElementById('modal');
         
-
-        const getMonthsForCurrentYear = () => {
-            let firstYear = anios[0];
-            $currentSelectedYear.innerText = firstYear;
-            const monthsForYear = findMonthsForYear(Number(firstYear), dateData);
-            return monthsForYear;
-        }
         $openModalButtonPurchase.addEventListener('click', () => {
             const adapter = new PurchaseModalAdapter(getMonthsForCurrentYear());
             ListView.showModal(adapter);
@@ -216,26 +238,7 @@ allTabs.forEach(tab => {
             const adapter = new SellModalAdapter(getMonthsForCurrentYear());
             ListView.showModal(adapter);
         });
-        $closeModalButton.addEventListener('click', () => {
-            $modal.classList.remove('target');
-        });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const $backArrow = document.getElementById('back_arrow');
-            const $forwardArrow = document.getElementById('forward_arrow');
-            $backArrow.addEventListener('click', () => {
-                let previousYear = Number($currentSelectedYear.innerText) - 1;
-                if (!anios.includes(previousYear.toString())) return;
-                    $currentSelectedYear.innerText = previousYear;
-                    findMonthsForYear(previousYear, dateData);
-            });
-            $forwardArrow.addEventListener('click', () => {
-                let nextYear = Number($currentSelectedYear.innerText) + 1;
-                if (!anios.includes(nextYear.toString())) return;
-                    $currentSelectedYear.innerText = nextYear;
-                    findMonthsForYear(nextYear, dateData);
-            });
-        });
         document.getElementById('sell-purchase__container').addEventListener('keypress', (event) => {
             event.preventDefault();
             if (event.target.value.includes('.') && event.key === '.') return
@@ -294,7 +297,6 @@ const removeToast = (toast) => {
 }
 window.removeToast = removeToast;
 export const createToast = (id, message) => {
-    // console.log('DENTRO DE LA FUNCION PARA CREAR EL TOAST')
     const { icon } = toastDetails[id];
     const toast = document.createElement("li");
     toast.className = `toast ${id}`;
