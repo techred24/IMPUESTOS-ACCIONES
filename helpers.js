@@ -41,7 +41,6 @@ export const createElementsForMonthData = (newDates) => {
         name: 'li',
         attributes: {
             class: 'tab__date'
-            //tab__date
         }
     }
     const dateElement = {
@@ -66,7 +65,7 @@ export const createElementsForMonthData = (newDates) => {
         fecha.innerText = infoToAdd.fecha;
         elementToAdd.appendChild(fecha);
         elementToAdd.appendChild(dato);
-        console.log(document.getElementById('dates-box'))
+        console.log(document.getElementById('dates-box'), document.getElementById('inpc__indices').childNodes)
         document.getElementById('dates-box').prepend(elementToAdd);
     }
 }
