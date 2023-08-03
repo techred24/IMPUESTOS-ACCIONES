@@ -1,5 +1,5 @@
 import { ListView, PurchaseModalAdapter, SellModalAdapter } from "./adapter.js";
-import { request, findMonthsForYear, setIndicesForUser } from "./helpers.js";
+import { request, findMonthsForYear, setIndicesForUser, deletePreviousElements, createElementsForMonthData } from "./helpers.js";
 const anios = [];
 const dateData = [];
 
@@ -86,14 +86,18 @@ document.addEventListener('DOMContentLoaded', () => {
         let previousYear = Number($currentSelectedYear.innerText) - 1;
         if (!anios.includes(previousYear.toString())) return;
             $currentSelectedYear.innerText = previousYear;
-            findMonthsForYear(previousYear, dateData);
+            deletePreviousElements();
+            let newDatesForTabs = findMonthsForYear(previousYear, dateData);
+            createElementsForMonthData(newDatesForTabs);
     });
     $forwardArrow.addEventListener('click', () => {
         console.log('Clicking on forward arrow')
         let nextYear = Number($currentSelectedYear.innerText) + 1;
         if (!anios.includes(nextYear.toString())) return;
             $currentSelectedYear.innerText = nextYear;
-            findMonthsForYear(nextYear, dateData);
+            deletePreviousElements();
+            let newDatesForTabs = findMonthsForYear(nextYear, dateData);
+            createElementsForMonthData(newDatesForTabs);
     });
 });
 const getMonthsForCurrentYear = () => {

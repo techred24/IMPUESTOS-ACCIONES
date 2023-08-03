@@ -65,7 +65,6 @@ export const createElementsForMonthData = (newDates) => {
         fecha.innerText = infoToAdd.fecha;
         elementToAdd.appendChild(fecha);
         elementToAdd.appendChild(dato);
-        // console.log(document.getElementById('dates-box'), document.getElementById('inpc__indices').childNodes)
         document.getElementById('dates-box').prepend(elementToAdd);
     }
 }
