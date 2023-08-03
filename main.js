@@ -64,6 +64,16 @@ const dateData = [];
 //       let key = window.event ? event.which : event.keyCode
 //       if ((key >= 48 && key <= 57) || key === 46) event.target.value += event.key
 // });
+const clickListenerOnTab = (event) => {
+    if (event.target.className === 'tab__date') {
+        // console.log(event.target.children[0].innerText, event.target.children[1].innerText);
+        const id = $inpcContainer.dataset.type === 'purchase' ? 'purchase-figure' : 'sell-figure';
+        setIndicesForUser(id, { fecha: event.target.children[0].innerText, dato: event.target.children[1].innerText });
+        // document.getElementById('dates-box').removeEventListener('click', clickListenerOnTab)
+        $closeModalButton.click();
+    }
+}
+
 
 const datesBox = document.querySelector('#dates-box');
 const dateTabs = document.querySelectorAll('.tab__date');
@@ -145,10 +155,10 @@ allTabs.forEach(tab => {
 
 allTabs.forEach(tab => {
     tab.addEventListener('click', ()=> {
-        if (document.getElementById('buttons__container') && document.getElementById('sell-purchase__container')) {
-            document.getElementById('buttons__container').remove()
-            document.getElementById('sell-purchase__container').remove()
-        }
+        // if (document.getElementById('buttons__container') && document.getElementById('sell-purchase__container')) {
+        //     document.getElementById('buttons__container').remove()
+        //     document.getElementById('sell-purchase__container').remove()
+        // }
         if (tab.innerText === 'Calcular impuesto de enajenación de acción') {
             document.body.insertAdjacentHTML('beforeend', `
             <div class="buttons__container" id="buttons__container">
@@ -227,15 +237,7 @@ allTabs.forEach(tab => {
                     findMonthsForYear(nextYear, dateData);
             });
         });
-
-        document.getElementById('inpc__indices').addEventListener('click', (event) => {
-            if (event.target.className === 'tab__date') {
-                // console.log(event.target.children[0].innerText, event.target.children[1].innerText);
-                const id = $inpcContainer.dataset.type === 'purchase' ? 'purchase-figure' : 'sell-figure';
-                setIndicesForUser(id, { fecha: event.target.children[0].innerText, dato: event.target.children[1].innerText });
-                $closeModalButton.click();
-            }
-        });
+        document.getElementById('dates-box').addEventListener('click', clickListenerOnTab);
 
         document.getElementById('sell-purchase__container').addEventListener('keypress', (event) => {
             event.preventDefault();

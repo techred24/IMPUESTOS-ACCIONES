@@ -80,7 +80,7 @@ const comparePurchasePriceNotGreaterThanSellPrice = (id) => {
     const purchaseDate = new Date(purchaseYear, purchaseMonth, 0).getTime();
     if (purchaseDate > sellDate) {
         document.getElementById(id).innerText = ''
-        localStorage.setItem(id, undefined);
+        localStorage.removeItem(id)
         createToast('error', 'El mes de compra no debe ser mayor al mes de venta');
     }
 }
