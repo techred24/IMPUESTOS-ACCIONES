@@ -64,15 +64,17 @@ const dateData = [];
 //       let key = window.event ? event.which : event.keyCode
 //       if ((key >= 48 && key <= 57) || key === 46) event.target.value += event.key
 // });
+const $inpcContainer = document.getElementById('inpc__indices');
+const $closeModalButton = document.getElementById('modal__button-close');
 const clickListenerOnTab = (event) => {
     if (event.target.className === 'tab__date') {
         // console.log(event.target.children[0].innerText, event.target.children[1].innerText);
         const id = $inpcContainer.dataset.type === 'purchase' ? 'purchase-figure' : 'sell-figure';
         setIndicesForUser(id, { fecha: event.target.children[0].innerText, dato: event.target.children[1].innerText });
-        // document.getElementById('dates-box').removeEventListener('click', clickListenerOnTab)
         $closeModalButton.click();
     }
 }
+document.getElementById('dates-box').addEventListener('click', clickListenerOnTab);
 
 
 const datesBox = document.querySelector('#dates-box');
@@ -88,9 +90,7 @@ const handleDateIcons = (scrollVal) => {
 
 dateArrowIcons.forEach(icon => {
     icon.addEventListener("click", () => {
-        // if clicked icon is left, reduce 350 from tabsBox scrollLeft else add
         let scrollWidth = datesBox.scrollLeft += icon.id === "date-left" ? -340 : 340;
-        // console.log(scrollWidth, 'scrollWidth');
         handleDateIcons(scrollWidth);
     });
 });
@@ -155,10 +155,10 @@ allTabs.forEach(tab => {
 
 allTabs.forEach(tab => {
     tab.addEventListener('click', ()=> {
-        // if (document.getElementById('buttons__container') && document.getElementById('sell-purchase__container')) {
-        //     document.getElementById('buttons__container').remove()
-        //     document.getElementById('sell-purchase__container').remove()
-        // }
+        if (document.getElementById('buttons__container') && document.getElementById('sell-purchase__container')) {
+            document.getElementById('buttons__container').remove()
+            document.getElementById('sell-purchase__container').remove()
+        }
         if (tab.innerText === 'Calcular impuesto de enajenación de acción') {
             document.body.insertAdjacentHTML('beforeend', `
             <div class="buttons__container" id="buttons__container">
@@ -199,9 +199,8 @@ allTabs.forEach(tab => {
         let $currentSelectedYear = document.getElementById('currentSelectedYear');
         const $openModalButtonPurchase = document.getElementById('selectIndexPurchase');
         const $openModalButtonSell = document.getElementById('selectIndexSell');
-        const $closeModalButton = document.getElementById('modal__button-close');
         const $modal = document.getElementById('modal');
-        const $inpcContainer = document.getElementById('inpc__indices');
+        
 
         const getMonthsForCurrentYear = () => {
             let firstYear = anios[0];
@@ -237,8 +236,6 @@ allTabs.forEach(tab => {
                     findMonthsForYear(nextYear, dateData);
             });
         });
-        document.getElementById('dates-box').addEventListener('click', clickListenerOnTab);
-
         document.getElementById('sell-purchase__container').addEventListener('keypress', (event) => {
             event.preventDefault();
             if (event.target.value.includes('.') && event.key === '.') return
