@@ -31,7 +31,7 @@ export const request = async (dateData, anios) => {
         return newDates;
     }
  export const deletePreviousElements = () => {
-        const $inpcContainer = document.getElementById('inpc__indices');
+        const $inpcContainer = document.getElementById('dates-box');
         const inpcData = $inpcContainer.children;
         if (inpcData.length === 0) return
         [...inpcData].forEach(element => element.remove());
@@ -65,7 +65,7 @@ export const createElementsForMonthData = (newDates) => {
         fecha.innerText = infoToAdd.fecha;
         elementToAdd.appendChild(fecha);
         elementToAdd.appendChild(dato);
-        console.log(document.getElementById('dates-box'), document.getElementById('inpc__indices').childNodes)
+        // console.log(document.getElementById('dates-box'), document.getElementById('inpc__indices').childNodes)
         document.getElementById('dates-box').prepend(elementToAdd);
     }
 }
@@ -88,14 +88,15 @@ export const setIndicesForUser = (id, { fecha, dato }) => {
     const indexToShow = document.getElementById(id);
     // indexToShow.innerText = '';
     indexToShow.innerText = `${dato} (${fecha})`;
-    setDatesForShareTransaction(id, fecha);
+    setDatesInLocalStorageForShareTransaction(id, fecha);
     verifyIfSetBothIndexed(id)
 }
 const verifyIfSetBothIndexed = (id) => {
     const purchaseIndexContent = document.getElementById('purchase-figure').innerHTML;
     const sellIndexContent = document.getElementById('sell-figure').innerHTML;
     if (purchaseIndexContent.length === 0 || sellIndexContent.length === 0) return;
-    comparePurchasePriceNotGreaterThanSellPrice(id)
+    comparePurchasePriceNotGreaterThanSellPrice(id);
+    if (!document.getElementById(id).innerText) return
     console.log('llegando aqui');
     setUpdateFactor();
 }
@@ -109,7 +110,7 @@ const setUpdateFactor = () => {
     let updateIndex = Number(sellIndex) / Number(purchaseIndex);
     updateFigure.innerText = updateIndex;
 }
-const setDatesForShareTransaction = (id, fecha) => {
+const setDatesInLocalStorageForShareTransaction = (id, fecha) => {
     localStorage.setItem(id, fecha);
 }
 // const updatePurchaseDate = () => {

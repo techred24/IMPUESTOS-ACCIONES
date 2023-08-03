@@ -95,7 +95,7 @@ dateTabs.forEach(tab => {
 const draggingDates = (e) => {
     if(!isDragginDateTabs) return;
     datesBox.classList.add("dragging");
-    console.log(e.movementX, 'e.movementX');
+    // console.log(e.movementX, 'e.movementX');
     datesBox.scrollLeft -= e.movementX;
     handleIcons(datesBox.scrollLeft)
 }
@@ -136,6 +136,7 @@ arrowIcons.forEach(icon => {
 
 allTabs.forEach(tab => {
     tab.addEventListener("click", () => {
+        // localStorage.clear();
         // tabsBox.querySelector(".active").classList.remove("active");
         allTabs.forEach(tab => tab.matches('.active') ? tab.classList.remove('active') : null);
         tab.classList.add("active");
@@ -228,13 +229,12 @@ allTabs.forEach(tab => {
         });
 
         document.getElementById('inpc__indices').addEventListener('click', (event) => {
-            console.log('clicking in indices')
-            // if (event.target.className === 'tab__date') {
-            //     console.log(event.target.children[0].innerText, event.target.children[1].innerText);
-            //     const id = $inpcContainer.dataset.type === 'purchase' ? 'purchase-figure' : 'sell-figure';
-            //     setIndicesForUser(id, { fecha: event.target.children[0].innerText, dato: event.target.children[1].innerText });
-            //     $closeModalButton.click();
-            // }
+            if (event.target.className === 'tab__date') {
+                // console.log(event.target.children[0].innerText, event.target.children[1].innerText);
+                const id = $inpcContainer.dataset.type === 'purchase' ? 'purchase-figure' : 'sell-figure';
+                setIndicesForUser(id, { fecha: event.target.children[0].innerText, dato: event.target.children[1].innerText });
+                $closeModalButton.click();
+            }
         });
 
         document.getElementById('sell-purchase__container').addEventListener('keypress', (event) => {
@@ -295,6 +295,7 @@ const removeToast = (toast) => {
 }
 window.removeToast = removeToast;
 export const createToast = (id, message) => {
+    // console.log('DENTRO DE LA FUNCION PARA CREAR EL TOAST')
     const { icon } = toastDetails[id];
     const toast = document.createElement("li");
     toast.className = `toast ${id}`;
