@@ -66,8 +66,8 @@ export const createElementsForMonthData = (newDates) => {
         fecha.innerText = infoToAdd.fecha;
         elementToAdd.appendChild(fecha);
         elementToAdd.appendChild(dato);
-        console.log(document.getElementById('inpc__indices'))
-        document.getElementById('inpc__indices').prepend(elementToAdd);
+        console.log(document.getElementById('dates-box'))
+        document.getElementById('dates-box').prepend(elementToAdd);
     }
 }
 const comparePurchasePriceNotGreaterThanSellPrice = (id) => {

@@ -163,12 +163,12 @@ body {
 .icon-date:first-child {
   left: 0;
   display: none;
-  background: linear-gradient(90deg, #fff 70%, transparent);
+  /* background: linear-gradient(90deg, #fff 70%, transparent); */
 }
 .icon-date:last-child {
   right: 0;
   justify-content: flex-end;
-  background: linear-gradient(-90deg, #fff 70%, transparent);
+  /* background: linear-gradient(-90deg, #fff 70%, transparent); */
 }
 .icon-date i {
   width: 55px;
