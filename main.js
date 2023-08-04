@@ -86,7 +86,7 @@ const draggingDates = (e) => {
     datesBox.classList.add("dragging");
     // console.log(e.movementX, 'e.movementX');
     datesBox.scrollLeft -= e.movementX;
-    handleIcons(datesBox.scrollLeft)
+    handleDateIcons(datesBox.scrollLeft);
 }
 
 const dateDragStop = () => {
@@ -201,9 +201,13 @@ allTabs.forEach(tab => {
 function checkOverflow() {
     let el = document.getElementById('dates-box');
     let isOverflowing = el.clientWidth < el.scrollWidth || el.clientHeight < el.scrollHeight;
-    console.log(isOverflowing, 'Overflow state')
-    // if (!isOverflowing) dateArrowIcons.forEach(icon => icon.parentElement.style.display = 'none');
-    // if (isOverflowing) dateArrowIcons[1].parentElement.style.display = 'flex';
+    // console.log(isOverflowing, 'Overflow state')
+    let maxScrollableWidth = datesBox.scrollWidth - datesBox.clientWidth;
+    if (!isOverflowing) dateArrowIcons.forEach(icon => icon.parentElement.style.display = 'none');
+    if (isOverflowing) {
+        dateArrowIcons[0].parentElement.style.display = datesBox.scrollLeft <= 0 ? 'none' : 'flex';
+        dateArrowIcons[1].parentElement.style.display = maxScrollableWidth - datesBox.scrollLeft <= 1 ? 'none' : 'flex';
+    }
 }
 
 const dragging = (e) => {
