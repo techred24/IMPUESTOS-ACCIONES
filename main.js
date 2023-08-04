@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             deletePreviousElements();
             let newDatesForTabs = findMonthsForYear(previousYear, dateData);
             createElementsForMonthData(newDatesForTabs);
+            checkOverflow();
     });
     $forwardArrow.addEventListener('click', () => {
         // console.log('Clicking on forward arrow')
@@ -40,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             deletePreviousElements();
             let newDatesForTabs = findMonthsForYear(nextYear, dateData);
             createElementsForMonthData(newDatesForTabs);
+            checkOverflow();
     });
 });
 const getMonthsForCurrentYear = () => {
@@ -179,10 +181,12 @@ allTabs.forEach(tab => {
         $openModalButtonPurchase.addEventListener('click', () => {
             const adapter = new PurchaseModalAdapter(getMonthsForCurrentYear());
             ListView.showModal(adapter);
+            checkOverflow();
         });
         $openModalButtonSell.addEventListener('click', () => {
             const adapter = new SellModalAdapter(getMonthsForCurrentYear());
             ListView.showModal(adapter);
+            checkOverflow();
         });
 
         document.getElementById('sell-purchase__container').addEventListener('keypress', (event) => {
@@ -194,6 +198,13 @@ allTabs.forEach(tab => {
         }
     })
 })
+function checkOverflow() {
+    let el = document.getElementById('dates-box');
+    let isOverflowing = el.clientWidth < el.scrollWidth || el.clientHeight < el.scrollHeight;
+    console.log(isOverflowing, 'Overflow state')
+    // if (!isOverflowing) dateArrowIcons.forEach(icon => icon.parentElement.style.display = 'none');
+    // if (isOverflowing) dateArrowIcons[1].parentElement.style.display = 'flex';
+}
 
 const dragging = (e) => {
     if(!isDragging) return;
