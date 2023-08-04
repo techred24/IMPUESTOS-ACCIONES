@@ -210,11 +210,11 @@ body {
 }
 .date__tabs__box .tab__date {
   cursor: pointer;
-  font-size: 1.18rem;
+  font-size: 12px;
   white-space: nowrap;
   background: #007ACC;
-  padding: 13px 20px;
-  border-radius: 30px;
+  padding: 7px 5px;
+  border-radius: 10px;
   color: #d8d5f2;
 }
 .date__tabs__box .tab__date:hover {
