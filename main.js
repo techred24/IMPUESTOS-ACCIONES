@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const $backArrow = document.getElementById('back_arrow');
     const $forwardArrow = document.getElementById('forward_arrow');
     $backArrow.addEventListener('click', () => {
-        console.log('Clicking on back arrow')
+        // console.log('Clicking on back arrow')
         let previousYear = Number($currentSelectedYear.innerText) - 1;
         if (!anios.includes(previousYear.toString())) return;
             $currentSelectedYear.innerText = previousYear;
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             createElementsForMonthData(newDatesForTabs);
     });
     $forwardArrow.addEventListener('click', () => {
-        console.log('Clicking on forward arrow')
+        // console.log('Clicking on forward arrow')
         let nextYear = Number($currentSelectedYear.innerText) + 1;
         if (!anios.includes(nextYear.toString())) return;
             $currentSelectedYear.innerText = nextYear;
