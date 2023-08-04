@@ -127,14 +127,17 @@ body {
 }
 .back_arrow, .forward_arrow {
     all: unset;
-    font-size: 2em;
-    padding: .5rem;
+    font-size: 1.5em;
+    /* padding: .5rem; */
     font-weight: bold;
     border-radius: 50%;
     cursor: pointer;
     background-color: #007ACC;
     transition: background-color .3s ease;
     transition: transform .1s ease;
+    height: 45px;
+    width: 45px;
+    line-height: 45px;
 }
 .back_arrow:hover, .forward_arrow:hover {
     background-color: #1c9aed;
