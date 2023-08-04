@@ -200,7 +200,7 @@ allTabs.forEach(tab => {
 })
 function checkOverflow() {
     let el = document.getElementById('dates-box');
-    let isOverflowing = el.clientWidth < el.scrollWidth || el.clientHeight < el.scrollHeight;
+    let isOverflowing = el.clientWidth < el.scrollWidth;
     // console.log(isOverflowing, 'Overflow state')
     let maxScrollableWidth = datesBox.scrollWidth - datesBox.clientWidth;
     if (!isOverflowing) dateArrowIcons.forEach(icon => icon.parentElement.style.display = 'none');
