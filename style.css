@@ -124,6 +124,8 @@ body {
 .inpc__arrows {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
 }
 .back_arrow, .forward_arrow {
     all: unset;
@@ -146,7 +148,11 @@ body {
 .back_arrow:active, .forward_arrow:active {
     transform: scale(1.2);
 }
-
+.currentSelectedYear {
+  /* padding: 1rem 0; */
+  font-size: 20px;
+  font-weight: bold;
+}
 .inpc__indices {
   /* padding: 5px; */
   position: relative;
