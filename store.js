@@ -20,10 +20,22 @@ const createStore = (reducer, initialState) => {
 const reducer = (state, action) => {
     switch (action.type) {
         case 'purchase-date':{
-          return {...state, ...action.payload }
+          return { ...state, ...action.payload }
         }
         case 'sell-date':{
-          return {...state, ...action.payload }
+          return { ...state, ...action.payload }
+        }
+        case 'purchase-price':{
+            return { ...state, ...action.payload }
+        }
+        case 'sell-price':{
+            return { ...state, ...action.payload }
+        }
+        case 'commission-paid-purchase':{
+            return { ...state, ...action.payload }
+        }
+        case 'commission-paid-sell':{
+            return { ...state, ...action.payload }
         }
         default: {
           return state
