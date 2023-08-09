@@ -194,6 +194,7 @@ allTabs.forEach(tab => {
             if (event.target.value.includes('.') && event.key === '.') return
             let key = window.event ? event.which : event.keyCode
             if ((key >= 48 && key <= 57) || key === 46) event.target.value += event.key
+            else document.querySelector('.notifications').textContent.includes('Sólo se permiten números') ? null : createToast('warning', 'Sólo se permiten números')
         });
         }
     })
