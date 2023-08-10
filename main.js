@@ -85,6 +85,7 @@ const draggingDates = (e) => {
     if(!isDragginDateTabs) return;
     datesBox.classList.add("dragging");
     // console.log(e.movementX, 'e.movementX');
+    // console.log(datesBox.scrollLeft, 'datesBox.scrollLeft');
     datesBox.scrollLeft -= e.movementX;
     handleDateIcons(datesBox.scrollLeft);
 }
@@ -93,7 +94,14 @@ const dateDragStop = () => {
     isDragginDateTabs = false;
     datesBox.classList.remove("dragging");
 }
-
+datesBox.addEventListener('wheel', (e) => {
+    // console.log(e.deltaY, 'e.deltaY')
+    // console.log(e.wheelDeltaY, 'e.wheelDeltaY')
+    // console.log(e.currentTarget.scrollLeft, 'SCROLLLEFT DESDE CURRENT TARGET')
+    let newValue = datesBox.scrollLeft - e.deltaY;
+    datesBox.scrollLeft -= e.deltaY;
+    handleDateIcons(newValue);
+});
 datesBox.addEventListener("mousedown", () => isDragginDateTabs = true);
 datesBox.addEventListener("mousemove", draggingDates);
 document.addEventListener("mouseup", dateDragStop);
