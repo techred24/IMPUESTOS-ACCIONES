@@ -54,6 +54,7 @@ const getMonthsForCurrentYear = () => {
 const $modal = document.getElementById('modal');
 $closeModalButton.addEventListener('click', () => {
     $modal.classList.remove('target');
+    enableScroll();
 });
 
 const datesBox = document.querySelector('#dates-box');
@@ -189,11 +190,13 @@ allTabs.forEach(tab => {
         $openModalButtonPurchase.addEventListener('click', () => {
             const adapter = new PurchaseModalAdapter(getMonthsForCurrentYear());
             ListView.showModal(adapter);
+            disableScroll();
             checkOverflow();
         });
         $openModalButtonSell.addEventListener('click', () => {
             const adapter = new SellModalAdapter(getMonthsForCurrentYear());
             ListView.showModal(adapter);
+            disableScroll();
             checkOverflow();
         });
 
