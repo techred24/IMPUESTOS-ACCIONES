@@ -1,4 +1,4 @@
-import { createToast } from "./main.js";
+import { createToast } from "./toast.js";
 import { store } from "./store.js";
 
 export const createElement = ({ name, attributes }) => {
