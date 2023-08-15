@@ -1,5 +1,6 @@
 import { ListView, PurchaseModalAdapter, SellModalAdapter } from "./adapter.js";
 import { request, findMonthsForYear, setIndicesForUser, deletePreviousElements, createElementsForMonthData } from "./helpers.js";
+import { Router, customRoutes } from "./router.js";
 import { createToast } from "./toast.js";
 const anios = [];
 const dateData = [];
