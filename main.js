@@ -110,7 +110,7 @@ document.addEventListener("mouseup", dateDragStop);
 
 
 const tabsBox = document.querySelector(".tabs-box"),
-allTabs = tabsBox.querySelectorAll(".tab"),
+allTabs = tabsBox.querySelectorAll(".tab__button"),
 arrowIcons = document.querySelectorAll(".icon i");
 
 let isDragging = false;
