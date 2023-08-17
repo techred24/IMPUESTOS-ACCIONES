@@ -144,33 +144,9 @@ allTabs.forEach(tab => {
 
 allTabs.forEach(tab => {
     tab.addEventListener('click', ()=> {
-        if (tab.innerText === 'Calcular impuesto de enajenación de acción') {
-            // document.body.insertAdjacentHTML('beforeend', ``)
-        // const $openModalButtonPurchase = document.getElementById('selectIndexPurchase');
-        // const $openModalButtonSell = document.getElementById('selectIndexSell');
-        
-        // $openModalButtonPurchase.addEventListener('click', () => {
-        //     const adapter = new PurchaseModalAdapter(getMonthsForCurrentYear());
-        //     ListView.showModal(adapter);
-        //     disableScroll();
-        //     checkOverflow();
-        // });
-        // $openModalButtonSell.addEventListener('click', () => {
-        //     const adapter = new SellModalAdapter(getMonthsForCurrentYear());
-        //     ListView.showModal(adapter);
-        //     disableScroll();
-        //     checkOverflow();
-        // });
-
-        // document.getElementById('sell-purchase__container').addEventListener('keypress', (event) => {
-        //     event.preventDefault();
-        //     if (event.target.value.includes('.') && event.key === '.') return
-        //     let key = window.event ? event.which : event.keyCode
-        //     if ((key >= 48 && key <= 57) || key === 46) event.target.value += event.key
-        //     else document.querySelector('.notifications').textContent.includes('Sólo se permiten números') ? null : createToast('warning', 'Sólo se permiten números')
-        // });
-        }
-    })
+        // if (tab.innerText === 'Calcular impuesto de enajenación de acción') {
+        // }
+    });
 })
 export function checkOverflow() {
     let el = document.getElementById('dates-box');
