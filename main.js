@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
             checkOverflow();
     });
 });
-const getMonthsForCurrentYear = () => {
+export const getMonthsForCurrentYear = () => {
     let firstYear = anios[0];
     $currentSelectedYear.innerText = firstYear;
     const monthsForYear = findMonthsForYear(Number(firstYear), dateData);
@@ -144,74 +144,35 @@ allTabs.forEach(tab => {
 
 allTabs.forEach(tab => {
     tab.addEventListener('click', ()=> {
-        if (document.getElementById('buttons__container') && document.getElementById('sell-purchase__container')) {
-            document.getElementById('buttons__container').remove()
-            document.getElementById('sell-purchase__container').remove()
-        }
         if (tab.innerText === 'Calcular impuesto de enajenación de acción') {
-            document.body.insertAdjacentHTML('beforeend', `
-            <div class="buttons__container" id="buttons__container">
-            <button id="selectIndexPurchase" class="selectIndex">Seleccionar indice de compra</button>
-            <button id="selectIndexSell" class="selectIndex">Seleccionar indice de venta</button>
-            <div class="indices-compra-venta__wrapper">
-                <p class="purchase-index">Indice de mes anterior a la compra: <span id="purchase-figure"></span></p>
-                <p class="sell-index">Indice de mes al vender: <span id="sell-figure"></span></p>
-                <p class="update-factor">Factor de actualización: <span id="update-figure"></span></p>
-            </div>
-            </div>
-            
-            
-            <div class="sell-purchase__container" id="sell-purchase__container">
-            <div class="data__purchase">
-                <div class="input__data">
-                    <label for="purchasePrice">Precio de compra:</label>
-                    <input type="text" id="purchasePrice">
-                </div>
-                <div class="input__data">
-                    <label for="purchaseCommission">Comisión pagada por la compra:</label>
-                    <input type="text" id="purchaseCommission">
-                </div>
-            </div>
-            
-            <div class="data__sell">
-                <div class="input__data">
-                    <label for="sellPrice">Precio de venta:</label>
-                    <input type="text" id="sellPrice">
-                </div>
-                <div class="input__data">
-                    <label for="sellCommission">Comisión pagada por la venta:</label>
-                    <input type="text" id="sellCommission">
-                </div>
-            </div>
-            </div>`)
-
-        const $openModalButtonPurchase = document.getElementById('selectIndexPurchase');
-        const $openModalButtonSell = document.getElementById('selectIndexSell');
+            // document.body.insertAdjacentHTML('beforeend', ``)
+        // const $openModalButtonPurchase = document.getElementById('selectIndexPurchase');
+        // const $openModalButtonSell = document.getElementById('selectIndexSell');
         
-        $openModalButtonPurchase.addEventListener('click', () => {
-            const adapter = new PurchaseModalAdapter(getMonthsForCurrentYear());
-            ListView.showModal(adapter);
-            disableScroll();
-            checkOverflow();
-        });
-        $openModalButtonSell.addEventListener('click', () => {
-            const adapter = new SellModalAdapter(getMonthsForCurrentYear());
-            ListView.showModal(adapter);
-            disableScroll();
-            checkOverflow();
-        });
+        // $openModalButtonPurchase.addEventListener('click', () => {
+        //     const adapter = new PurchaseModalAdapter(getMonthsForCurrentYear());
+        //     ListView.showModal(adapter);
+        //     disableScroll();
+        //     checkOverflow();
+        // });
+        // $openModalButtonSell.addEventListener('click', () => {
+        //     const adapter = new SellModalAdapter(getMonthsForCurrentYear());
+        //     ListView.showModal(adapter);
+        //     disableScroll();
+        //     checkOverflow();
+        // });
 
-        document.getElementById('sell-purchase__container').addEventListener('keypress', (event) => {
-            event.preventDefault();
-            if (event.target.value.includes('.') && event.key === '.') return
-            let key = window.event ? event.which : event.keyCode
-            if ((key >= 48 && key <= 57) || key === 46) event.target.value += event.key
-            else document.querySelector('.notifications').textContent.includes('Sólo se permiten números') ? null : createToast('warning', 'Sólo se permiten números')
-        });
+        // document.getElementById('sell-purchase__container').addEventListener('keypress', (event) => {
+        //     event.preventDefault();
+        //     if (event.target.value.includes('.') && event.key === '.') return
+        //     let key = window.event ? event.which : event.keyCode
+        //     if ((key >= 48 && key <= 57) || key === 46) event.target.value += event.key
+        //     else document.querySelector('.notifications').textContent.includes('Sólo se permiten números') ? null : createToast('warning', 'Sólo se permiten números')
+        // });
         }
     })
 })
-function checkOverflow() {
+export function checkOverflow() {
     let el = document.getElementById('dates-box');
     let isOverflowing = el.clientWidth < el.scrollWidth;
     // console.log(isOverflowing, 'Overflow state')
@@ -266,14 +227,14 @@ try {
 let wheelOpt = supportsPassive ? { passive: false } : false;
 let wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
 
-function disableScroll() {
+export function disableScroll() {
   window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
   window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
   window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
   window.addEventListener('keydown', preventDefaultForScrollKeys, false);
 }
 
-function enableScroll() {
+export function enableScroll() {
   window.removeEventListener('DOMMouseScroll', preventDefault, false);
   window.removeEventListener(wheelEvent, preventDefault, wheelOpt); 
   window.removeEventListener('touchmove', preventDefault, wheelOpt);
