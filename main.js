@@ -216,3 +216,17 @@ export function enableScroll() {
   window.removeEventListener('touchmove', preventDefault, wheelOpt);
   window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
 }
+
+
+// INPUTS
+
+document.getElementById('pdf-input').addEventListener('change', (event) => {
+    // console.log(document.getElementById('pdf-input').value)
+    const documentName = event.target.files[0].name
+    const extension = documentName.substring(documentName.lastIndexOf('.') + 1);
+    console.log(extension);
+    if (extension !== 'pdf') {
+        event.target.value = null
+        createToast('warning', 'Seleccione un archivo con extensión pdf')
+    }
+})
