@@ -222,6 +222,7 @@ export function enableScroll() {
 
 document.getElementById('pdf-input').addEventListener('change', (event) => {
     // console.log(document.getElementById('pdf-input').value)
+    console.log(event.target.files[0])
     const documentName = event.target.files[0].name
     const extension = documentName.substring(documentName.lastIndexOf('.') + 1);
     console.log(extension);
@@ -230,3 +231,40 @@ document.getElementById('pdf-input').addEventListener('change', (event) => {
         createToast('warning', 'Seleccione un archivo con extensión pdf')
     }
 })
+
+
+
+
+
+const fileInput = document.querySelector('#avatar');
+const preview = document.querySelector("img.preview");
+const eventLog = document.querySelector(".event-log-contents");
+const reader = new FileReader();
+
+function handleEvent(event) {
+  eventLog.textContent += `${event.type}: ${event.loaded} bytes transferred\n`;
+
+  if (event.type === "load") {
+    preview.src = reader.result;
+  }
+}
+
+function addListeners(reader) {
+  reader.addEventListener("loadstart", handleEvent);
+  reader.addEventListener("load", handleEvent);
+  reader.addEventListener("loadend", handleEvent);
+  reader.addEventListener("progress", handleEvent);
+  reader.addEventListener("error", handleEvent);
+  reader.addEventListener("abort", handleEvent);
+}
+
+function handleSelected(e) {
+  eventLog.textContent = "";
+  const selectedFile = fileInput.files[0];
+  if (selectedFile) {
+    addListeners(reader);
+    reader.readAsDataURL(selectedFile);
+  }
+}
+
+fileInput.addEventListener("change", handleSelected);
