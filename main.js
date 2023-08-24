@@ -219,52 +219,30 @@ export function enableScroll() {
 
 
 // INPUTS
-
-document.getElementById('pdf-input').addEventListener('change', (event) => {
+const embed = document.getElementById('view-pdf');
+document.getElementById('pdf-input').addEventListener('change', function (event) {
     // console.log(document.getElementById('pdf-input').value)
-    console.log(event.target.files[0])
     const documentName = event.target.files[0].name
     const extension = documentName.substring(documentName.lastIndexOf('.') + 1);
-    console.log(extension);
+    // console.log(extension);
     if (extension !== 'pdf') {
         event.target.value = null
-        createToast('warning', 'Seleccione un archivo con extensión pdf')
+        createToast('warning', 'Seleccione un archivo con extensión pdf');
+        return
     }
-})
+    let pdffile = this.files[0];
+    let pdf = new Blob([pdffile], { type: pdffile.type });
+    const pdfURL = URL.createObjectURL(pdf)+'#toolbar=0';
+    // embed.src = pdfURL
+    embed.setAttribute('src', pdfURL);
+});
 
-
-
-
-
-const fileInput = document.querySelector('#avatar');
-const preview = document.querySelector("img.preview");
-const eventLog = document.querySelector(".event-log-contents");
-const reader = new FileReader();
-
-function handleEvent(event) {
-  eventLog.textContent += `${event.type}: ${event.loaded} bytes transferred\n`;
-
-  if (event.type === "load") {
-    preview.src = reader.result;
-  }
-}
-
-function addListeners(reader) {
-  reader.addEventListener("loadstart", handleEvent);
-  reader.addEventListener("load", handleEvent);
-  reader.addEventListener("loadend", handleEvent);
-  reader.addEventListener("progress", handleEvent);
-  reader.addEventListener("error", handleEvent);
-  reader.addEventListener("abort", handleEvent);
-}
-
-function handleSelected(e) {
-  eventLog.textContent = "";
-  const selectedFile = fileInput.files[0];
-  if (selectedFile) {
-    addListeners(reader);
-    reader.readAsDataURL(selectedFile);
-  }
-}
-
-fileInput.addEventListener("change", handleSelected);
+// POPUP WINDOW
+let win = window.open(
+    '',
+    null,
+    'popup,width=400,height=400,left=300,top=500'
+  );
+  win.document.write(
+    '<html><head><title>Sample</title></head><body>Sample</body></html>'
+  );

@@ -14,6 +14,9 @@
 body {
     font-family: sans-serif;
 }
+.root {
+  text-align: center;
+}
 [class$='container'] {
     width: 90%;
     max-width: 1200px;
@@ -456,4 +459,80 @@ body {
     font-size: 1rem;
     margin-left: 20px;
   }
+}
+
+/* INPUTS */
+.inputs {
+  display: inline-block;
+}
+.pdf-input {
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.pdf-input + label {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: white;
+  background-color: #5372F0;
+  display: inline-block;
+  padding: 1rem .5rem;
+  border-radius: .5rem;
+}
+
+.pdf-input:focus + label,
+.pdf-input + label:hover {
+  background-color: #758ce9;
+}
+.pdf-input + label {
+	cursor: pointer;
+}
+.pdf-input:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+.inputfile + label * {
+	pointer-events: none;
+}
+[class='embed'] {
+  display: block;
+  margin: 0 auto;
+  margin-top: 1rem;
+}
+
+
+.xml-input {
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.xml-input + label {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: white;
+  background-color: #5372F0;
+  display: inline-block;
+  padding: 1rem .5rem;
+  border-radius: .5rem;
+}
+
+.xml-input:focus + label,
+.xml-input + label:hover {
+  background-color: #758ce9;
+}
+.xml-input + label {
+	cursor: pointer;
+}
+.xml-input:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+.inputfile + label * {
+	pointer-events: none;
 }

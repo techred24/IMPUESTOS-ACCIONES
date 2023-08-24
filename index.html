@@ -45,21 +45,15 @@
 
     <ul class="notifications"></ul>
 
-    <div id="root">
-        <input type="file" id="pdf-input" />
+    <div id="root" class="root">
+        <div class="inputs">
+            <input type="file" id="pdf-input" class="pdf-input" />
+            <label for="pdf-input"><strong>Seleccione un archivo PDF</strong></label>
 
-        <label for="avatar">Choose a profile picture:</label>
-        <input
-        type="file"
-        id="avatar"
-        name="avatar"
-        />
-        <img src="" class="preview" height="200" alt="Image preview" />
-
-        <div class="event-log">
-          <label for="eventLog">Event log:</label>
-          <textarea readonly class="event-log-contents" id="eventLog"></textarea>
+            <input type="file" id="xml-input" class="xml-input" />
+            <label for="xml-input"><strong>Selecciones una archivo XML</strong></label>
         </div>
+        <embed id="view-pdf" class="embed" type="application/pdf" width="400" height="400">
     </div>
 </body>
 </html>
