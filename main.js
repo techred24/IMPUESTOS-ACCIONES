@@ -217,32 +217,13 @@ export function enableScroll() {
   window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
 }
 
-
-// INPUTS
-const embed = document.getElementById('view-pdf');
-document.getElementById('pdf-input').addEventListener('change', function (event) {
-    // console.log(document.getElementById('pdf-input').value)
-    const documentName = event.target.files[0].name
-    const extension = documentName.substring(documentName.lastIndexOf('.') + 1);
-    // console.log(extension);
-    if (extension !== 'pdf') {
-        event.target.value = null
-        createToast('warning', 'Seleccione un archivo con extensión pdf');
-        return
-    }
-    let pdffile = this.files[0];
-    let pdf = new Blob([pdffile], { type: pdffile.type });
-    const pdfURL = URL.createObjectURL(pdf)+'#toolbar=0';
-    // embed.src = pdfURL
-    embed.setAttribute('src', pdfURL);
-});
-
 // POPUP WINDOW
-let win = window.open(
-    '',
-    null,
-    'popup,width=400,height=400,left=300,top=500'
-  );
-  win.document.write(
-    '<html><head><title>Sample</title></head><body>Sample</body></html>'
-  );
+// let win = window.open(
+//     '',
+//     null,
+//     'popup,width=400,height=400,left=300,top=500'
+//   );
+//   win.document.write(
+//     '<html><head><title>Sample</title></head><body>Sample</body></html>'
+//   );
+//   setTimeout(() => win.close(), 3000);

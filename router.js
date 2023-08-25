@@ -1,5 +1,6 @@
 import { ListView, PurchaseModalAdapter, SellModalAdapter } from "./adapter.js";
 import { checkOverflow, disableScroll, getMonthsForCurrentYear } from "./main.js";
+import { templateSubirArchivos } from "./template_files.js";
 import { templateCalcularImpuestos } from "./template_impuestos.js";
 import { createToast } from "./toast.js";
 
@@ -62,17 +63,23 @@ export const customRoutes = [
     {
         path: 'documentos',
         action: () => {
-            renderPage('<p>Cargar Documentos</p>');
-        },
-        children: [
-            {
-                path: 'test',
-                action: () => {
-                    renderPage('TEST')
-                }
-            }
-        ]
-    }
+            renderPage(templateSubirArchivos);
+        }
+    },
+    // {
+    //     path: 'documentos',
+    //     action: () => {
+    //         renderPage(templateSubirArchivos);
+    //     },
+    //     children: [
+    //         {
+    //             path: 'test',
+    //             action: () => {
+    //                 renderPage('TEST')
+    //             }
+    //         }
+    //     ]
+    // }
 ];
 
 const router = new Router(customRoutes);
@@ -88,7 +95,7 @@ function renderHTML(html) {
 export function navigate(path) {
     router.navigate(path);
 }
-document.getElementById('register-documents').addEventListener('click', () => navigate('/documentos'));
+// document.getElementById('register-documents').addEventListener('click', () => navigate('/documentos'));
 document.getElementById('calculate-taxes').addEventListener('click', () => {
     navigate('/calcular');
     const $openModalButtonPurchase = document.getElementById('selectIndexPurchase');
@@ -114,4 +121,32 @@ document.getElementById('calculate-taxes').addEventListener('click', () => {
             if ((key >= 48 && key <= 57) || key === 46) event.target.value += event.key
             else document.querySelector('.notifications').textContent.includes('Sólo se permiten números') ? null : createToast('warning', 'Sólo se permiten números')
         });
+});
+document.getElementById('register-documents').addEventListener('click', () => {
+    navigate('/documentos');
+    const embed = document.getElementById('view-pdf');
+    document.getElementById('xml-input').addEventListener('change', function (event) {
+        const documentName = this.files[0].name;
+        const extension = documentName.substring(documentName.lastIndexOf('.') + 1);
+        if (extension !== 'xml') {
+            this.value = null;
+            createToast('warning', 'Seleccione un archivo con extensión xml');
+        }
+    });
+    document.getElementById('pdf-input').addEventListener('change', function (event) {
+        // console.log(document.getElementById('pdf-input').value)
+        const documentName = event.target.files[0].name
+        const extension = documentName.substring(documentName.lastIndexOf('.') + 1);
+        // console.log(extension);
+        if (extension !== 'pdf') {
+            event.target.value = null
+            createToast('warning', 'Seleccione un archivo con extensión pdf');
+            return
+        }
+        let pdffile = this.files[0];
+        let pdf = new Blob([pdffile], { type: pdffile.type });
+        const pdfURL = URL.createObjectURL(pdf)+'#toolbar=0';
+        // embed.src = pdfURL
+        embed.setAttribute('src', pdfURL);
+    });
 });
